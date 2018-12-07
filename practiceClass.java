@@ -25,7 +25,7 @@ public class practiceClass extends Exception {
 		 * System.setProperty("webdriver.chrome.driver","G:\\chromedriver.exe");
 		 * WebDriver driver = new ChromeDriver();
 		 */
-		System.setProperty("webdriver.chrome.driver","/Users/vishadpatel10990/Desktop/Selenium/chromedriver");
+		System.setProperty("webdriver.chrome.driver","/Users/Desktop/Selenium/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		
 		
@@ -57,13 +57,13 @@ public class practiceClass extends Exception {
          * Send input values to email and password fields using ids.
          * 
          */						
-        driver.findElement(By.id("email")).sendKeys("vishad");
+        driver.findElement(By.id("email")).sendKeys("name");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElement(By.id("email")).clear();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.id("email")).sendKeys("vishadpatel10990@gmail.com");
+        driver.findElement(By.id("email")).sendKeys("admin");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.id("pass")).sendKeys("Krishna99");
+        driver.findElement(By.id("pass")).sendKeys("admin");
         
         //Click Buttons 
         driver.findElement(By.id("loginbutton")).click();
@@ -72,8 +72,8 @@ public class practiceClass extends Exception {
        /*
         * Validate login is successful
         */
-       WebElement loggedInUser = driver.findElement(By.xpath(".//*[contains(@id,"pagelet_bluebar")]/descendant::*[contains(text(),"Vishad")]"));
-         	if(Assert.assertEquals(loggedInUser.getText(),"Vishad")){
+       WebElement loggedInUser = driver.findElement(By.xpath(".//*[contains(@id,"pagelet_bluebar")]/descendant::*[contains(text(),"name")]"));
+         	if(Assert.assertEquals(loggedInUser.getText(),"name")){
         	 System.out.println("Login test passed");
          	}else
          	{
