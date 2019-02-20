@@ -1,211 +1,282 @@
-package com.vishadstool.autoprogram;
-import java.net.URL;
-import java.sql.Driver;
+package com.vishadstool.gui;
 
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.winium.DesktopOptions;
-import org.openqa.selenium.winium.WiniumDriver;
-import org.openqa.selenium.winium.WiniumDriverCommandExecutor;
+import java.util.Scanner;
 
+import java.awt.EventQueue;
 
-import java.lang.Object;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
+import javax.swing.JDesktopPane;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JPanel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JInternalFrame;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.List;
+import java.awt.Canvas;
+import java.awt.Color;
+import javax.swing.border.SoftBevelBorder;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.vishadstool.autoprogram.ToolContent;
+
+import javax.swing.border.BevelBorder;
+import javax.swing.Box;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import javax.swing.Action;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.awt.event.ActionListener;
+import javax.swing.JList;
+import javax.swing.border.TitledBorder;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.SwingConstants;
+import java.awt.Point;
+import java.awt.Component;
+import java.awt.ComponentOrientation;
+import javax.swing.JProgressBar;
+import javax.swing.JTree;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JLayeredPane;
+import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 
-//import org.openqa.selenium.firefox.FirefoxDriver;
-	//comment the above line and uncomment below line to use Chrome
-	import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.*;
-import java.io.IOException;	
-	
+public class ToolDesign {
 
-public class ToolContent extends Exception {
+	private JFrame frame;
+	private final Action action = new SwingAction();
+	ToolContent test= new ToolContent();
+	DefaultListModel demoList = new DefaultListModel();
+	Scanner inputText = new Scanner (System.in);
 	
-//public static void main (String[] args){
-	WebDriver driver;
-	WiniumDriver driver1;
-	DesktopOptions option = new DesktopOptions();
+	private JTextField textField_2;
+	private JTextField textField;
+	private JTextField textField_1;
 	
-	/*
-	 * Universal method to accept browser, to be created later/ Once you figure out how to create a pop up window to happen 
-	 * before and then in take parameters and transfer them through the code to individual browser methods.   
-	 * 
+	/**
+	 * Launch the application.
 	 */
-	public void universalbrowser() {
-	
-		
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ToolDesign window = new ToolDesign();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
-	
-		/*
-		 *	To enable Chrome Browser
-		 */
-	public void chromeBrowser() {
-		
-		try {
-			System.setProperty("webdriver.chrome.driver","C:\\Selenium Project\\Drivers\\chromedriver.exe");
-			driver = new ChromeDriver();
-			driver.manage().window().maximize();
-			driver.manage().deleteAllCookies();
-			driver.get("https://google.com");
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-		
-	}
-	
-	/*
-	 *	To enable Firefox Browser
+
+	/**
+	 * Create the application.
 	 */
-	public void firefoxBrowser() {
-	
-		try {
-			System.setProperty("webdriver.gecko.driver","C:\\Selenium Project\\Drivers\\geckodriver.exe");
-			driver = new FirefoxDriver();
-			driver.manage().window().maximize();
-			driver.manage().deleteAllCookies();
-			driver.get("https://google.com");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public ToolDesign() {
+		initialize();
 	}
-	
-	/*
-	 *	To enable IE Browser
+
+	/**
+	 * Initialize the contents of the frame.
 	 */
-	public void ieBrowser() {
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 727, 656);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		try {
-			System.setProperty("webdriver.ie.driver","C:\\Selenium Project\\Drivers\\IEDriverServer.exe");
-			driver = new InternetExplorerDriver();
-			driver.manage().window().maximize();
-			driver.manage().deleteAllCookies();
-			driver.get("https://google.com");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	/*
-	 *	To enable Windows application
-	 */
-	public void windowApplication()  {
+		JInternalFrame internalFrame = new JInternalFrame("Actions ");
+		internalFrame.setVisible(true);
 		
-		DesktopOptions option = new DesktopOptions();
-		option.setApplicationPath("C:\\Windows\\System32\\calc.exe");
-		try {
-			WiniumDriver driverWin = new WiniumDriver(new URL("http://localhost:9999"), option);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		JInternalFrame internalFrame_1 = new JInternalFrame("TestCase");
+		internalFrame_1.setVisible(true);
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(internalFrame_1, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+					.addGap(2)
+					.addComponent(internalFrame, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(internalFrame_1, GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+				.addComponent(internalFrame, GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+		);
+		
+		JMenuBar menuBar_2 = new JMenuBar();
+		internalFrame_1.setJMenuBar(menuBar_2);
+		
+		JMenu mnTools = new JMenu("Tools");
+		mnTools.setToolTipText("list of tools");
+		mnTools.setHorizontalTextPosition(SwingConstants.LEADING);
+		mnTools.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		
+		
+		JMenuItem mntmNewScript = new JMenuItem("New Script");
+		menuBar_2.add(mntmNewScript);
+		menuBar_2.add(mnTools);
+		
+		JMenuItem mntmVariable = new JMenuItem("Variable");
+		mnTools.add(mntmVariable);
+		
+		
+		JMenuItem mntmAction = new JMenuItem("Action");
+		mntmAction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				
-	}
-	
-	/*
-	 * Actions 
-	 * 
-	 */
-	public void clickAction(String locator) {
-		 
-		driver.findElement(By.id(locator)).click();
+				
+				 demoList.add(0, "Action Added");
+				
+			}
+		});
+		mnTools.add(mntmAction);
 		
-	}
-	
-	public void WaitAction(int waitTime) {
-		 
-		driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
+		JMenuItem mntmWait = new JMenuItem("Wait");
+		mnTools.add(mntmWait);
 		
-	}
-	
-	public void get(String url){
-		driver.get(url);
-	}
-	
-	
-	public void windowHandler(){
+		JMenuItem mntmComment = new JMenuItem("Comment");
+		mnTools.add(mntmComment);
+		internalFrame_1.getContentPane().setLayout(null);
 		
-		String winHandleBefore = driver.getWindowHandle();
-		driver.switchTo().window(winHandleBefore);
+		JList list = new JList(demoList);
+		list.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		list.setBorder(new TitledBorder(null, "Write Your Script ", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		list.setBounds(0, 0, 416, 521);
+		internalFrame_1.getContentPane().add(list);
 		
-	}
-	
-	public void close(){
-		driver.close();
+		JMenuBar menuBar_1 = new JMenuBar();
+		internalFrame.setJMenuBar(menuBar_1);
+		internalFrame.getContentPane().setLayout(null);
 		
-	}
-
-	public void quit(){
-		driver.quit();
-	}
-	
-	//validate text as true or false. 
-	public Boolean validateText(String expectedText, String xpath){
 		
-		String actualText = driver.findElement(By.xpath(xpath)).getText();
-		 
-		if (actualText.equals(expectedText)){
-			return true;
-		}else{
+		
+		
+		JLabel lblNewLabel = new JLabel("Xpath:");
+		lblNewLabel.setBounds(12, 63, 56, 16);
+		internalFrame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Expected:");
+		lblNewLabel_1.setBounds(12, 33, 56, 16);
+		internalFrame.getContentPane().add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setBounds(94, 1, 116, 22);
+		internalFrame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(94, 30, 116, 22);
+		internalFrame.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(60, 60, 187, 22);
+		internalFrame.getContentPane().add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblVaribleId = new JLabel("Varible ID:");
+		lblVaribleId.setBounds(12, 4, 86, 16);
+		internalFrame.getContentPane().add(lblVaribleId);
+		
+		JButton btnSave = new JButton("Save");
+		btnSave.setBounds(94, 128, 97, 25);
+		internalFrame.getContentPane().add(btnSave);
+		frame.getContentPane().setLayout(groupLayout);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenu mnOpenBrowser = new JMenu("Open Browser");
+		mnFile.add(mnOpenBrowser);
+		
+		JMenuItem mntmChrome = new JMenuItem("Chrome");
+		mntmChrome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+					test.chromeBrowser();
+			}
+		});
+		mnOpenBrowser.add(mntmChrome);
+		
+		JMenuItem mntmFirefox = new JMenuItem("FireFox");
+		mntmFirefox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+					
+					test.firefoxBrowser();
+			}
+		});
+		mnOpenBrowser.add(mntmFirefox);
+		
+		JMenuItem mntmInternetExplorer = new JMenuItem("Internet Explorer");
+		mntmInternetExplorer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+					
+					test.ieBrowser();
+			}
+		});
+		mnOpenBrowser.add(mntmInternetExplorer);
+		
+		JMenuItem mntmSafari = new JMenuItem("Safari");
+		mnOpenBrowser.add(mntmSafari);
+		
+		JMenuItem mntmEdge = new JMenuItem("Edge");
+		mnOpenBrowser.add(mntmEdge);
+		
+		JMenu mnOpenApplication = new JMenu("Open application");
+		mnFile.add(mnOpenApplication);
+		
+		JMenuItem mntmWindowsApplication = new JMenuItem("Windows application");
+		mntmWindowsApplication.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
 			
-			return false;
+				test.windowApplication();
+				
+			}
+		});
+		mnOpenApplication.add(mntmWindowsApplication);
+		
+		JMenu mnSave = new JMenu("Save");
+		mnFile.add(mnSave);
+		
+		JMenuItem mntmImport = new JMenuItem("Import");
+		mnFile.add(mntmImport);
+		
+		JMenuItem mntmExport = new JMenuItem("Export");
+		mnFile.add(mntmExport);
+		
+		JMenu mnEdit = new JMenu("Edit");
+		menuBar.add(mnEdit);
+		
+		
+		
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
 		}
 		
+		
+		
 	}
-	
-	
-	
-	
-	
-	
 }
-
-//}
-
-
-
-
-
-
-/*
- * @BeforeTest
-public static void setupEnvironment(){
-    options = new DesktopOptions(); //Instantiate Winium Desktop Options
-    options.setApplicationPath("C:\\Windows\\System32\\calc.exe");
-    File driverPath = new File("C:\\Winium\\Winium.Desktop.Driver.exe");
-    System.setProperty("webdriver.winium.desktop.driver","C:\\Winium\\Winium.Desktop.Driver.exe");
-    service = new WiniumDriverService.Builder().usingDriverExecutable(driverPath).usingPort(9999).withVerbose(true)
-            .withSilent(false).buildDesktopService();
-    try {
-        service.start();
-    } catch (IOException e) {
-        System.out.println("Exception while starting WINIUM service");
-        e.printStackTrace();
-    }
-}
-
-@BeforeMethod
-public void startDriver(){
-    driver = new WiniumDriver(service,options);
-}
-
-@AfterMethod
-public void stopDriver(){
-    driver.close();
-}
-
-@AfterTest
-public void tearDown(){
-    service.stop();
-}
- * 
- * 
- */
-	
