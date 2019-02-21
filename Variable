@@ -1,0 +1,36 @@
+package com.vishadstool.autoprogram;
+
+public class Variable {
+	
+	String variableId;
+	String variableXpath;
+	
+ public Variable(String variableId, String variableXpath)
+ {
+	 this.variableId=variableId;
+	 this.variableXpath=variableXpath;
+	 
+ }
+
+public String getVariableId() {
+	return variableId;
+}
+
+public void setVariableId(String variableId) {
+	this.variableId = variableId;
+}
+
+public String getVariableXpath() {
+	return variableXpath;
+}
+
+public void setVariableXpath(String variableXpath) {
+	this.variableXpath = variableXpath;
+}
+
+@Override
+public String toString(){
+return variableId;
+
+}
+}
