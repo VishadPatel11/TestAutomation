@@ -21,10 +21,12 @@ import java.awt.Canvas;
 import java.awt.Color;
 import javax.swing.border.SoftBevelBorder;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.vishadstool.autoprogram.ToolContent;
+import com.vishadstool.autoprogram.Variable;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.Box;
@@ -37,6 +39,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.awt.event.ActionListener;
 import javax.swing.JList;
 import javax.swing.border.TitledBorder;
@@ -53,12 +57,13 @@ import javax.swing.JLayeredPane;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 
-public class ToolDesign {
+public class TAC {
 
 	private JFrame frame;
 	private final Action action = new SwingAction();
 	ToolContent test= new ToolContent();
-	DefaultListModel demoList = new DefaultListModel();
+	DefaultListModel<String> model = new DefaultListModel<String>();
+	LinkedHashMap<String, String> demoList= new LinkedHashMap<String, String>();
 	Scanner inputText = new Scanner (System.in);
 	
 	private JTextField textField_2;
@@ -72,7 +77,7 @@ public class ToolDesign {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ToolDesign window = new ToolDesign();
+					TAC window = new TAC();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -84,7 +89,7 @@ public class ToolDesign {
 	/**
 	 * Create the application.
 	 */
-	public ToolDesign() {
+	public TAC() {
 		initialize();
 	}
 
@@ -129,6 +134,14 @@ public class ToolDesign {
 		menuBar_2.add(mnTools);
 		
 		JMenuItem mntmVariable = new JMenuItem("Variable");
+		mntmVariable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String name=textField.getText();
+				String field=textField_2.getText();
+				demoList.put(name, field);
+				model.addElement(String.valueOf(demoList));
+			}
+		});
 		mnTools.add(mntmVariable);
 		
 		
@@ -137,20 +150,28 @@ public class ToolDesign {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
-				 demoList.add(0, "Action Added");
-				
 			}
 		});
 		mnTools.add(mntmAction);
 		
 		JMenuItem mntmWait = new JMenuItem("Wait");
+		mntmWait.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//demoList.add(0, "Wait Added");
+			}
+		});
 		mnTools.add(mntmWait);
 		
 		JMenuItem mntmComment = new JMenuItem("Comment");
+		mntmComment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//demoList.add(0, "Comment Added");
+			}
+		});
 		mnTools.add(mntmComment);
 		internalFrame_1.getContentPane().setLayout(null);
 		
-		JList list = new JList(demoList);
+		JList list = new JList(model);
 		list.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		list.setBorder(new TitledBorder(null, "Write Your Script ", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		list.setBounds(0, 0, 416, 521);
