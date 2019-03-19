@@ -22,9 +22,9 @@ package com.vishadstool.autoprogram;
      public JList jlist;
   
      private VariableModel myModel;
-     public DefaultListModel variableList;	  //this contains the attributes(id,name,xpath) for specific variables.
-     public DefaultListModel variableName;    //this contains the attributes(id,name,xpath) for specific variables.
-     public DefaultListModel variableXpath;   //this contains the attributes(id,name,xpath) for specific variables.
+     public DefaultListModel variableAction;	  //this contains the attributes(action,name,xpath) for specific variables.
+     public DefaultListModel variableName;    //this contains the attributes(action,name,xpath) for specific variables.
+     public DefaultListModel variableXpath;   //this contains the attributes(action,name,xpath) for specific variables.
      
      public JPanel getPanel() { return listPanel; }
   
@@ -34,8 +34,8 @@ package com.vishadstool.autoprogram;
          myModel = (VariableModel)WmvcApp.getModel();
          myModel.addView(this);  // add view to model list
   
-         variableList = new DefaultListModel(); // first allocation
-         variableList.addElement("No Variable List Opened");
+         variableAction = new DefaultListModel(); // first allocation
+         variableAction.addElement("Please start your script");
   
          variableName = new DefaultListModel();
          variableXpath = new DefaultListModel();
@@ -43,7 +43,7 @@ package com.vishadstool.autoprogram;
          listPanel = new JPanel();
          listPanel.setLayout(new BorderLayout());
   
-         jlist = new JList(variableList);
+         jlist = new JList(variableAction);
          jlist.setSelectionMode(
                          ListSelectionModel.SINGLE_SELECTION);       
          jlist.setSelectedIndex(0);
@@ -59,12 +59,15 @@ package com.vishadstool.autoprogram;
          // if list changed, don't need to refresh here
          if (myModel.getListChanged())
          {
-             variableList.ensureCapacity(
+             
+        	 variableAction.ensureCapacity(
                                myModel.getNumberOfVariables() + 8);
-             variableList.clear();
+             variableAction.clear();
+             
              variableName.ensureCapacity(
                      myModel.getNumberOfVariables() + 8);
              variableName.clear();
+             
              variableXpath.ensureCapacity(
                      myModel.getNumberOfVariables() + 8);
              variableXpath.clear();
@@ -75,7 +78,7 @@ package com.vishadstool.autoprogram;
              while (it.hasNext())
                {
                  Variable m = (Variable) it.next();
-                 variableList.addElement(m.getId());
+                 variableAction.addElement(m.getAction());
                  variableName.addElement(m.getVariableName());
                  variableXpath.addElement(m.getVariableXpath());
                }
@@ -87,6 +90,7 @@ package com.vishadstool.autoprogram;
          jlist.ensureIndexIsVisible(
                                 myModel.getCurrentVariableIndex());
          updating = false;
+         
      }
   
      // Implement ListSelectionListener

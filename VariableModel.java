@@ -72,10 +72,14 @@ package com.vishadstool.autoprogram;
   
              nextI = it.nextIndex();     // index of next entry
              Variable m = (Variable) it.next();
-             String adding = variable.getId();
-             String curName = m.getId();
+             String adding = variable.getAction();
+             String curName = m.getAction();
+         
+             /* uncomment the below if you want the list to always be sorted
              if (adding.compareToIgnoreCase(curName) <= 0)
-                 break;                  // curName > adding
+                 //break;                  // curName > adding
+             */
+         
          }
   
          if (!it.hasNext())      // add at end (also if 1st time)

@@ -8,15 +8,15 @@ package com.vishadstool.autoprogram;
  public class Variable implements  Cloneable
  {
      
-	 protected String id;
+	 protected String action;
      protected String variableName;
      protected String variableXpath;
      protected String comments;
   
      
      
-     public void setId(String id) { this.id = id; }
-     public String getId() { return id; }
+     public void setAction(String action) { this.action = action; }
+     public String getAction() { return action; }
      public void setVariableName(String variableName) { this.variableName = variableName; }
      public String getVariableName() { return variableName; }
      public void setVariableXpath(String variableXpath) { this.variableXpath = variableXpath; }
@@ -27,7 +27,7 @@ package com.vishadstool.autoprogram;
      public Variable()
      {
     	
-         id = new String(""); 
+         action = new String(""); 
          variableName = new String("");
          variableXpath = new String("");   
          comments = new String("");
@@ -40,7 +40,7 @@ package com.vishadstool.autoprogram;
          try
          {
              c = (Variable)super.clone();          		// copy ints
-             c.id = new String(id);       				// String doesn't
+             c.action = new String(action);       				// String doesn't
              c.variableName = new String(variableName); // have clone so
                  										// make copy of
              c.comments = new String(comments);			 // each String
@@ -59,7 +59,7 @@ package com.vishadstool.autoprogram;
          try             // read one VariableCat record
          {
         	 
-             id = new String(in.readUTF());
+             action = new String(in.readUTF());
              variableName = new String(in.readUTF());
              variableXpath = new String(in.readUTF());     
              comments = new String(in.readUTF());
@@ -75,7 +75,7 @@ package com.vishadstool.autoprogram;
      public void writeVariable(DataOutputStream out)
          throws IOException
      {
-         out.writeUTF(id);
+         out.writeUTF(action);
          out.writeUTF(variableName);
          out.writeUTF(variableXpath);
          out.writeUTF(comments);

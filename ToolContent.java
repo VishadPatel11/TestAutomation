@@ -31,6 +31,7 @@ public class ToolContent extends Exception {
 	WiniumDriver driver1;
 	DesktopOptions option = new DesktopOptions();
 	
+
 	/*
 	 * Universal method to accept browser, to be created later/ Once you figure out how to create a pop up window to happen 
 	 * before and then in take parameters and transfer them through the code to individual browser methods.   
@@ -38,7 +39,6 @@ public class ToolContent extends Exception {
 	 */
 	public void universalbrowser() {
 	
-		
 	}
 	
 		/*
@@ -47,7 +47,7 @@ public class ToolContent extends Exception {
 	public void chromeBrowser() {
 		
 		System.setProperty("webdriver.chrome.driver","C:\\Selenium Project\\Drivers\\chromedriver.exe");
-		driver = new ChromeDriver();
+		driver= new ChromeDriver();
 		driver.get("https://google.com");
 		
 	}
@@ -96,13 +96,10 @@ public class ToolContent extends Exception {
 		 
 		driver.findElement(By.xpath(locator)).click();
 		
-		
-		
-		
 	}
 	
-	public void WaitAction(int waitTime) {
-		 
+	public void waitAction(int waitTime) {
+		
 		driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
 		
 	}
@@ -134,6 +131,7 @@ public class ToolContent extends Exception {
 		String actualText = driver.findElement(By.xpath(xpath)).getText();
 		 
 		if (actualText.equals(expectedText)){
+			
 			return true;
 		}else{
 			

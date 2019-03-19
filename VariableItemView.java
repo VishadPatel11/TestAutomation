@@ -24,7 +24,7 @@ package com.vishadstool.autoprogram;
      // We use private statics of each of these since there will
      // be only one instance of the itemView
   
-     private static JLabel lblId=new JLabel("Variable Id: ");
+     private static JLabel lblId=new JLabel("Variable Action: ");
      private static JLabel fldId = new JLabel(" ");
      private static JLabel lblVariableName=new JLabel("VariableName: ");
      private static JLabel fldVariableName = new JLabel(" ");
@@ -116,7 +116,7 @@ package com.vishadstool.autoprogram;
          // When model changes - update each fld componenet
          Variable m = myModel.getCurrentVariable();
   
-         fldId.setText(m.getId());
+         fldId.setText(m.getAction());
          fldVariableName.setText(m.getVariableName());
          fldVariableXpath.setText(m.getVariableXpath());
          textArea.setText(m.getComments());

@@ -24,7 +24,7 @@ package com.vishadstool.autoprogram;
      // We use private statics of each of these since there will
      // be only one instance of the editor
   
-     private static JLabel lblId=new JLabel("Variable Id: ");
+     private static JLabel lblId=new JLabel("Variable Action: ");
      private static JTextField fldId = new JTextField(30);
      private static JLabel lblVariableName=new JLabel("VariableName: ");
      private static JTextField fldVariableName = new JTextField(30);
@@ -125,7 +125,7 @@ package com.vishadstool.autoprogram;
          variable = (Variable)m.clone();// make a copy to work with
          
          // Set box to current fields
-         fldId.setText(variable.getId());
+         fldId.setText(variable.getAction());
          fldVariableName.setText(variable.getVariableName());
          fldVariableXpath.setText(variable.getVariableXpath());
          textArea.setText(variable.getComments());
@@ -144,7 +144,7 @@ package com.vishadstool.autoprogram;
      {
          if (e.getActionCommand().equals("update"))
          {
-             variable.setId(fldId.getText());
+             variable.setAction(fldId.getText());
              variable.setVariableName(fldVariableName.getText());
              variable.setVariableXpath(fldVariableXpath.getText());
              variable.setComments(textArea.getText());
