@@ -1,7 +1,7 @@
 package com.vishadstool.autoprogram;
 /*
   * WmvcTBButtonCtl - implements JButton controller for tool bar
-  * (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.awt.*;

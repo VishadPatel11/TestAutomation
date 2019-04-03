@@ -1,8 +1,9 @@
 package com.vishadstool.autoprogram;
 import java.net.URL;
-import java.sql.Driver;
-
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.winium.DesktopOptions;
 import org.openqa.selenium.winium.WiniumDriver;
 import org.openqa.selenium.winium.WiniumDriverCommandExecutor;
@@ -15,31 +16,24 @@ import java.util.concurrent.TimeUnit;
 
 //import org.openqa.selenium.firefox.FirefoxDriver;
 	//comment the above line and uncomment below line to use Chrome
-	import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.*;
 import java.io.IOException;	
+import org.testng.Assert;
 	
 
 public class ToolContent extends Exception {
 	
-//public static void main (String[] args){
+
 	WebDriver driver;
 	WiniumDriver driver1;
-	DesktopOptions option = new DesktopOptions();
-	
+	DesktopOptions option;
+	boolean flag= false; 
 
-	/*
-	 * Universal method to accept browser, to be created later/ Once you figure out how to create a pop up window to happen 
-	 * before and then in take parameters and transfer them through the code to individual browser methods.   
-	 * 
-	 */
-	public void universalbrowser() {
-	
-	}
 	
 		/*
 		 *	To enable Chrome Browser
@@ -75,12 +69,13 @@ public class ToolContent extends Exception {
 	/*
 	 *	To enable Windows application
 	 */
-	public void windowApplication()  {
+	public void desktopApplication()  {
 		
-		DesktopOptions option = new DesktopOptions();
+		option = new DesktopOptions();
 		option.setApplicationPath("C:\\Windows\\System32\\calc.exe");
+		flag=true;
 		try {
-			WiniumDriver driverWin = new WiniumDriver(new URL("http://localhost:9999"), option);
+			driver1 = new WiniumDriver(new URL("http://localhost:9999"), option);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,19 +88,48 @@ public class ToolContent extends Exception {
 	 * 
 	 */
 	public void clickAction(String locator) {
-		 
-		driver.findElement(By.xpath(locator)).click();
+		
+		if(flag==false){
+			//web
+			driver.findElement(By.xpath(locator)).click();
+			
+		}else{
+			//desktop
+			driver1.findElement(By.xpath(locator)).click();
+		}
+		
 		
 	}
 	
-	public void waitAction(int waitTime) {
+	public void waitAction(String locator) {
 		
-		driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
+		
+			try {
+				if(flag==false){
+					 
+					driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+					//WebDriverWait wait = new WebDriverWait(driver,5); 
+					//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				}else{
+					driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+					//WebDriverWait wait = new WebDriverWait(driver1,5); 
+					//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 		
 	}
 	
 	public void get(String url){
-		driver.get(url);
+		if(flag==false){
+			driver.get(url);
+		}else{
+			driver1.get(url);
+		}
+		
 	}
 	
 	
@@ -117,35 +141,53 @@ public class ToolContent extends Exception {
 	}
 	
 	public void close(){
-		driver.close();
-		
+		if(flag==false){
+			driver.close();
+		}else{
+			driver1.close();
+		}
 	}
 
 	public void quit(){
-		driver.quit();
+		if(flag==false){
+			driver.quit();
+		}else{
+			driver1.quit();
+		}
 	}
 	
 	//validate text as true or false. 
 	public Boolean validateText(String expectedText, String xpath){
-		
-		String actualText = driver.findElement(By.xpath(xpath)).getText();
-		 
-		if (actualText.equals(expectedText)){
-			
-			return true;
-		}else{
-			
-			return false;
+		try {
+			if(flag==false){
+				String actualText = driver.findElement(By.xpath(xpath)).getText();
+				if (actualText.equals(expectedText)){
+				
+					return true;
+				}else{
+				
+					return false;
+				}
+			}else{
+				String actualText = driver1.findElement(By.xpath(xpath)).getText();
+				if (actualText.equals(expectedText)){
+				
+					return true;
+				}else{
+				
+					return false;
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
+		return false;
+	
+	
 	}
-	
-	
-	
-	
-	
-	
 }
+
 
 //}
 

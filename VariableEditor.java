@@ -1,6 +1,6 @@
 package com.vishadstool.autoprogram;
 /* VariableEditor - edits a Variable object for VariableCat
-  * Copyright (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.awt.*;
@@ -24,8 +24,8 @@ package com.vishadstool.autoprogram;
      // We use private statics of each of these since there will
      // be only one instance of the editor
   
-     private static JLabel lblId=new JLabel("Variable Action: ");
-     private static JTextField fldId = new JTextField(30);
+     private static JLabel lblAction = new JLabel("Action: ");
+     private static JComboBox fldAction;
      private static JLabel lblVariableName=new JLabel("VariableName: ");
      private static JTextField fldVariableName = new JTextField(30);
      private static JLabel lblVariableXpath = new JLabel("VariableXpath: ");
@@ -76,38 +76,38 @@ package com.vishadstool.autoprogram;
          c = new GridBagConstraints();
          itemPanel.setLayout(gridbag);
   
-         itemPanel.setBorder(BorderFactory.createEmptyBorder(
-                                                   5, 5, 5, 5));
-  
-         // Variable Id: ________________________
-         setAndAdd(lblId, 0, 0, 1, 1);
-         setAndAdd(fldId, 1, 0, 1, c.REMAINDER);
+         itemPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+         // Action: __________________________
+         setAndAdd(lblAction, 0, 0, 1, c.RELATIVE);
+         fldAction = new JComboBox(VariableAction.getNames());
+         setAndAdd(fldAction, 1, 0, 1, c.REMAINDER);
+         
   
          // VariableName: _____________________
-         setAndAdd(lblVariableName, 0, 1, 1, 1);
-         setAndAdd(fldVariableName, 1, 1, 1, c.REMAINDER);
+         setAndAdd(lblVariableName, 0, 2, 1, 1);
+         setAndAdd(fldVariableName, 1, 2, 1, c.REMAINDER);
   
-         // VariableXpath: _______      Genre: _________
-         setAndAdd(lblVariableXpath,  0, 2, 1, 1);
-         setAndAdd(fldVariableXpath,  1, 2, 1, 1);
+         // VariableXpath: _______      
+         setAndAdd(lblVariableXpath,  0, 3, 1, 1);
+         setAndAdd(fldVariableXpath,  1, 3, 1, c.REMAINDER);
          
          // Comment box:
-         setAndAdd(lblComments,  0,5,1,1);
+         setAndAdd(lblComments,  0,6,1,1);
          textArea = new JTextArea(4,30);
          JScrollPane textScroll = new JScrollPane(textArea);
-         setAndAdd(textScroll,  1,5,4,c.REMAINDER);
+         setAndAdd(textScroll,  1,6,4,c.REMAINDER);
   
          // Command Buttons
   
          bRevert =   new JButton(" Cancel ");
          bRevert.setActionCommand("revert");
          bRevert.addActionListener(this);
-         setAndAdd(bRevert, 2,9,1,1);
+         setAndAdd(bRevert, 2,10,1,1);
   
          bUpdate =   new JButton("   OK   ");
          bUpdate.setActionCommand("update");
          bUpdate.addActionListener(this);
-         setAndAdd(bUpdate, 3,9,1,1);
+         setAndAdd(bUpdate, 3,10,1,1);
          
          
   
@@ -125,7 +125,7 @@ package com.vishadstool.autoprogram;
          variable = (Variable)m.clone();// make a copy to work with
          
          // Set box to current fields
-         fldId.setText(variable.getAction());
+         fldAction.setSelectedIndex(variable.getAction());
          fldVariableName.setText(variable.getVariableName());
          fldVariableXpath.setText(variable.getVariableXpath());
          textArea.setText(variable.getComments());
@@ -144,7 +144,7 @@ package com.vishadstool.autoprogram;
      {
          if (e.getActionCommand().equals("update"))
          {
-             variable.setAction(fldId.getText());
+        	 variable.setAction(fldAction.getSelectedIndex());
              variable.setVariableName(fldVariableName.getText());
              variable.setVariableXpath(fldVariableXpath.getText());
              variable.setComments(textArea.getText());

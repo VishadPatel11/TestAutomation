@@ -195,21 +195,58 @@ package com.vishadstool.autoprogram;
                      myModel.deleteCurrentVariable();
                  }
              });
+         WmvcApp.addMenu(editMenu);				// Add to app menu
          
-         WmvcMenuItemCtl runn = new WmvcMenuItemCtl(
-                 editMenu,
-                 "Run Program","images/delx.gif", 'N',
-                  null /* no accel */, new WmvcExecutor()
-                  {
-                	 public void execute(ActionEvent event)
-                     {
-                         run.actionPerformed();
-                     }
-                  }
-                       
-                 );
+         // MenuBar: Run
+         JMenu runMenu = new JMenu("Run Program");
   
-         WmvcApp.addMenu(editMenu);      // Add to app menu
+         // Run->Run Current Variable Chrome Browser
+         WmvcMenuItemCtl runChrome = new WmvcMenuItemCtl(runMenu,
+             "Run with Chrome","images/gray.gif", 'E',
+             null /* no accel */,  new WmvcExecutor()
+             {
+                 public void execute(ActionEvent event)
+                 {
+                	 run.actionPerformed("chrome");
+                 }
+             });
+  
+         // Run->Run with FireFox Browser
+         WmvcMenuItemCtl runFirefox = new WmvcMenuItemCtl(runMenu,
+             "Run with FireFox","images/addvariable-16.gif", 'A',
+             null /* no accel */, new WmvcExecutor()
+             {
+                 public void execute(ActionEvent event)
+                 {
+                	 run.actionPerformed("firefox");
+                 }
+             });
+         
+         // Run->Run with IE Browser
+         WmvcMenuItemCtl runIE = new WmvcMenuItemCtl(runMenu,
+             "Run with IE","images/addvariable-16.gif", 'A',
+             null /* no accel */, new WmvcExecutor()
+             {
+                 public void execute(ActionEvent event)
+                 {
+                	 run.actionPerformed("IE");
+                 }
+             });
+  
+         // Run->Run Desktop Application 
+         WmvcMenuItemCtl desktopApp = new WmvcMenuItemCtl(
+             runMenu,
+             "Run with Desktop App","images/delx.gif", 'R',
+              null /* no accel */, new WmvcExecutor()
+             {
+                 public void execute(ActionEvent event)
+                 {
+                	 run.actionPerformed("desktopApp");
+                 }
+             });
+         
+  
+         WmvcApp.addMenu(runMenu);      // Add to app menu
   
          // ToolBar: Open
          WmvcTBButtonCtl toolOpen = new WmvcTBButtonCtl(

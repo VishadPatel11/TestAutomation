@@ -1,7 +1,7 @@
 package com.vishadstool.autoprogram;
 /*
   * WmvcView - An MVC view superclass for the Wmvc Framework
-  * Copyright (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.util.*;

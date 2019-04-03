@@ -1,7 +1,7 @@
 package com.vishadstool.autoprogram;
  /*
   * WmvcMenuItemCtl - implements JMenuItem controller
-  * (c) 2001, Bruce E. Wampler
+  * 
   */
  import java.awt.*;
  import java.awt.event.*;

@@ -1,7 +1,7 @@
 package com.vishadstool.autoprogram;
 /*
   * WmvcChkMenuItemCtl - implements JCheckBoxMenuItem controller
-  * (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.awt.*;

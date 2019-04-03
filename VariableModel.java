@@ -1,6 +1,6 @@
 package com.vishadstool.autoprogram;
 /* VariableModel - implements the variable model. Handles changes.
-  * Copyright 2019, Vishad R. Patel
+  * 
   */
   
  import java.io.*;
@@ -72,8 +72,8 @@ package com.vishadstool.autoprogram;
   
              nextI = it.nextIndex();     // index of next entry
              Variable m = (Variable) it.next();
-             String adding = variable.getAction();
-             String curName = m.getAction();
+             String adding = variable.getVariableName();
+             String curName = m.getVariableName();
          
              /* uncomment the below if you want the list to always be sorted
              if (adding.compareToIgnoreCase(curName) <= 0)
@@ -136,6 +136,7 @@ package com.vishadstool.autoprogram;
                  ListIterator it = getVariableListIterator();
                  while (it.hasNext())
                  {
+                	
                      Variable m = (Variable) it.next();
                      m.writeVariable(out);
                  }
@@ -230,6 +231,17 @@ package com.vishadstool.autoprogram;
              return null;
          else
              return (Variable)theList.elementAt(currentVariableIndex);
+     }
+
+     public VariableAction getCurrentVariableAction()
+     {
+         if (currentVariableIndex < 0 
+                      && currentVariableIndex >= theList.size())
+             return null;
+         else if (theList.size() == 0)
+             return null;
+         else
+             return (VariableAction)theList.elementAt(currentVariableIndex);
      }
      
      public void notifyViews()

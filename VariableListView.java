@@ -2,7 +2,7 @@ package com.vishadstool.autoprogram;
  /*
   * VariableListView - the list View of the VariableCat model.
   *  This view implements the view of the variable list
-  * Copyright (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.util.*;
@@ -20,9 +20,11 @@ package com.vishadstool.autoprogram;
      private static boolean updating = false;
      private JPanel listPanel;
      public JList jlist;
+    
   
      private VariableModel myModel;
-     public DefaultListModel variableAction;	  //this contains the attributes(action,name,xpath) for specific variables.
+     public DefaultListModel variablePassFail;
+     public DefaultListModel action;
      public DefaultListModel variableName;    //this contains the attributes(action,name,xpath) for specific variables.
      public DefaultListModel variableXpath;   //this contains the attributes(action,name,xpath) for specific variables.
      
@@ -34,16 +36,16 @@ package com.vishadstool.autoprogram;
          myModel = (VariableModel)WmvcApp.getModel();
          myModel.addView(this);  // add view to model list
   
-         variableAction = new DefaultListModel(); // first allocation
-         variableAction.addElement("Please start your script");
-  
+         variablePassFail= new DefaultListModel();
+         action= new DefaultListModel();
          variableName = new DefaultListModel();
+         variableName.addElement("Please start your script");
          variableXpath = new DefaultListModel();
          
          listPanel = new JPanel();
          listPanel.setLayout(new BorderLayout());
   
-         jlist = new JList(variableAction);
+         jlist = new JList(variableName);
          jlist.setSelectionMode(
                          ListSelectionModel.SINGLE_SELECTION);       
          jlist.setSelectedIndex(0);
@@ -60,9 +62,13 @@ package com.vishadstool.autoprogram;
          if (myModel.getListChanged())
          {
              
-        	 variableAction.ensureCapacity(
-                               myModel.getNumberOfVariables() + 8);
-             variableAction.clear();
+        	 variablePassFail.ensureCapacity(
+                     myModel.getNumberOfVariables() + 8);
+             variablePassFail.clear();
+             
+        	 action.ensureCapacity(
+                     myModel.getNumberOfVariables() + 8);
+             action.clear();
              
              variableName.ensureCapacity(
                      myModel.getNumberOfVariables() + 8);
@@ -75,12 +81,16 @@ package com.vishadstool.autoprogram;
              // See if just the selection changed
              // copy titles from variable list to view list
              ListIterator it = myModel.getVariableListIterator();
+            
              while (it.hasNext())
                {
                  Variable m = (Variable) it.next();
-                 variableAction.addElement(m.getAction());
+                 
+                 variablePassFail.addElement(VariablePassFail.stringAt(m.getVariablePassFail()));
+                 action.addElement(VariableAction.stringAt(m.getAction()));
                  variableName.addElement(m.getVariableName());
                  variableXpath.addElement(m.getVariableXpath());
+                 
                }
          }
          // Always update selected item

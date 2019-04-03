@@ -2,7 +2,7 @@ package com.vishadstool.autoprogram;
 /*
   * WmvcExecutor - Support class for implementation
   *   of the WmvcController class.
-  * (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.awt.event.*;

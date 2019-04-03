@@ -4,7 +4,7 @@ package com.vishadstool.autoprogram;
   *     Controller using the Command pattern - for Wmvc framework
   * Used to simplify Swing controls
   *
-  * (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.awt.*;

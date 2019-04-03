@@ -1,7 +1,7 @@
 package com.vishadstool.autoprogram;
 /*
   * WmvcModel - An MVC model superclass for the Wmvc Framework
-  * Copyright (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.util.*;

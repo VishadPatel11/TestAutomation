@@ -1,7 +1,7 @@
 package com.vishadstool.autoprogram;
 /*
   * WmvcApp - The main Application Class for Wmvc
-  * Copyright (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.awt.*;
@@ -21,6 +21,7 @@ package com.vishadstool.autoprogram;
      private static JMenuBar theMenuBar = null;
      private static JToolBar theToolBar = null;
      private static JPanel theContentPanel = null;
+     
     
      public static JFrame getFrame() { return theFrame; }
      public static JMenuBar getMenuBar() { return theMenuBar; }

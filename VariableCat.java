@@ -1,7 +1,7 @@
 package com.vishadstool.autoprogram;
 
 /* VariableCat - A simple Variable Application
-  * Copyright (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.awt.*;

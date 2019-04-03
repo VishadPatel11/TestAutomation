@@ -2,7 +2,7 @@ package com.vishadstool.autoprogram;
 /*
   * VariableItemView - the item View for the VariableCat model.
   * This implements a view of a single item - the current variable.
-  * Copyright (c) 2001, Bruce E. Wampler
+  * 
   */
   
  import java.util.*;
@@ -19,23 +19,28 @@ package com.vishadstool.autoprogram;
   
      private JPanel itemPanel;
      private VariableModel myModel;         // local copy
+     
   
      // Various components needed for constructing the view
      // We use private statics of each of these since there will
      // be only one instance of the itemView
   
-     private static JLabel lblId=new JLabel("Variable Action: ");
-     private static JLabel fldId = new JLabel(" ");
-     private static JLabel lblVariableName=new JLabel("VariableName: ");
+     private static JLabel lblAction = new JLabel("Action: ");
+     private static JLabel fldAction = new JLabel(" ");
+     private static JLabel lblVariableName = new JLabel("VariableName: ");
      private static JLabel fldVariableName = new JLabel(" ");
      private static JLabel lblVariableXpath = new JLabel("VariableXpath: ");
      private static JLabel fldVariableXpath = new JLabel(" ");
-     private static JLabel lblComments=new JLabel("Comments: ");
-  
+     private static JLabel lblComments =new JLabel("Comments: ");
+     private static JLabel lblPassFail = new JLabel("Pass/Fail: ");
+     public static JLabel fldPassFail = new JLabel();
+     
      private static JTextArea textArea;
      private static JButton bPrevious;
      private static JButton bNext;
      private static JButton bEdit;
+     
+		
   
      public JPanel getPanel() { return itemPanel; }
   
@@ -62,66 +67,72 @@ package com.vishadstool.autoprogram;
          gridbag = new GridBagLayout();
          c = new GridBagConstraints();
          itemPanel.setLayout(gridbag);
-         itemPanel.setBorder(BorderFactory.createEmptyBorder(
-                                                 5, 5, 5, 5));
+         itemPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
   
          // Set data fields to black foreground
-         fldId.setForeground(Color.black);
+         fldPassFail.setBackground(Color.black);
+         fldAction.setForeground(Color.black);
          fldVariableName.setForeground(Color.black);
          fldVariableXpath.setForeground(Color.black);
          
-  
-         // Variable Id: ________________________
-         setAndAdd(lblId, 0, 0, 1, 1, 1.0);
-         setAndAdd(fldId, 1, 0, 1, c.REMAINDER, 0.);
+         //Pass/Fail:_________________________
+         setAndAdd(lblPassFail, 0,0,1,1,1.0);
+         setAndAdd(fldPassFail, 1, 0, 1, c.REMAINDER,0.0);
+         // Action:________________________
+         setAndAdd(lblAction,  0, 2, 1, 1,1.0);
+         setAndAdd(fldAction,  1, 2, 1, c.REMAINDER,0.0);
+         
   
          // VariableName: _____________________
-         setAndAdd(lblVariableName, 0, 1, 1, 1, 1.0);
-         setAndAdd(fldVariableName, 1, 1, 1, c.REMAINDER, 0.0);
+         setAndAdd(lblVariableName, 0, 3, 1, 1, 1.0);
+         setAndAdd(fldVariableName, 1, 3, 1, c.REMAINDER, 0.0);
   
-         // VariableXpath: _______      Genre: _________
-         setAndAdd(lblVariableXpath,  0, 2, 1, 1, 1.0);
-         setAndAdd(fldVariableXpath,  1, 2, 1, 1, 0.0);
+         // VariableXpath: _______      
+         setAndAdd(lblVariableXpath,  0, 4, 1, 1, 1.0);
+         setAndAdd(fldVariableXpath,  1, 4, 1, c.REMAINDER, 0.0);
       
          // Comment box:
-         setAndAdd(lblComments,  0,5,1,1, 0.0);
+         setAndAdd(lblComments,  0,7,1,1, 1.0);
          textArea = new JTextArea(4,30);
          JScrollPane textScroll = new JScrollPane(textArea);
-         setAndAdd(textScroll,  1,5,4,c.REMAINDER, 0.0);
+         setAndAdd(textScroll,  1,7,4,c.REMAINDER, 0.0);
   
          // Command Buttons
          bEdit =   new JButton("  Edit  ");
          bEdit.setActionCommand("edit");
          bEdit.addActionListener(this);
          bEdit.setToolTipText("Edit current variable");
-         setAndAdd(bEdit, 1,9,1,1, 0.0);
+         setAndAdd(bEdit, 2,11,1,1, 0.0);
   
          bPrevious = new JButton("Previous");
          bPrevious.addActionListener(this);
          bPrevious.setActionCommand("previous");
          bPrevious.setIcon(new ImageIcon("images/left-16.gif"));
          bPrevious.setToolTipText("Go to previous variable");
-         setAndAdd(bPrevious, 2,9,1,1, 0.0);
+         setAndAdd(bPrevious, 3,11,1,1, 0.0);
   
          bNext =     new JButton("Next");
          bNext.setActionCommand("next");
          bNext.addActionListener(this);
          bNext.setIcon(new ImageIcon("images/right-16.gif"));
          bNext.setToolTipText("Go to next variable");
-         setAndAdd(bNext, 3,9,1,1,0.0);
+         setAndAdd(bNext, 4,11,1,1,0.0);
      }
   
      public void updateView()
      {
          // When model changes - update each fld componenet
          Variable m = myModel.getCurrentVariable();
-  
-         fldId.setText(m.getAction());
+         //
+         fldAction.setText(VariableAction.stringAt(m.getAction()));
          fldVariableName.setText(m.getVariableName());
          fldVariableXpath.setText(m.getVariableXpath());
          textArea.setText(m.getComments());
+         
      }
   
+     
+     
      // Implement ActionListener
      public void actionPerformed(ActionEvent e)
      {
@@ -145,5 +156,6 @@ package com.vishadstool.autoprogram;
                   myModel.getCurrentVariableIndex()+1);
          }
      }
+     
  }
  
